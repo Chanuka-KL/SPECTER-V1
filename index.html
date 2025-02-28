@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specter AI Assistant</title>
+</head>
+<body>
+    <h1>Specter AI Assistant</h1>
+    <textarea id="prompt" placeholder="Enter your text..."></textarea>
+    <button onclick="generateResponse()">Generate</button>
+    <p id="response"></p>
+    <audio id="audioPlayer" controls></audio>
+
+    <script>
+        async function generateResponse() {
+            let prompt = document.getElementById("prompt").value;
+
+            let aiResponse = await fetch("https://your-bot-hosting.net/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: prompt }),
+            });
+
+            let data = await aiResponse.json();
+            document.getElementById("response").innerText = data.text;
+
+            let ttsResponse = await fetch("https://your-bot-hosting.net/text-to-speech", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: data.text }),
+            });
+
+            let ttsData = await ttsResponse.json();
+            document.getElementById("audioPlayer").src = ttsData.audio;
+        }
+    </script>
+</body>
+</html>
