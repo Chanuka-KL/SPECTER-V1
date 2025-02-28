@@ -1,0 +1,12 @@
+{
+  "name": "github-pat-openai-app",
+  "version": "1.0.0",
+  "description": "A web app that runs OpenAI via GitHub PAT",
+  "main": "script.js",
+  "dependencies": {
+    "openai": "^4.0.0"
+  },
+  "scripts": {
+    "start": "node script.js"
+  }
+}
